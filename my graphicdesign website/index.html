@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="icon" type="image/png" href="MSGD LOGO.jpeg" >
+<title>Muhammad Shayan Shahbaz — Design Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#E01010;--red-dk:#A00A0A;--red-glow:rgba(224,16,16,0.18);
+  --yellow:#FFD600;--yellow-dk:#C9A800;
+  --black:#0A0A0A;--black2:#111;--gray1:#181818;--gray2:#222;--gray3:#333;
+  --white:#F5F5F5;--muted:#777;--muted2:#555;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(10,10,10,0.96);backdrop-filter:blur(8px);
+  border-bottom:2px solid var(--red);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:62px;
+  
+}
+.logo a{ text-decoration: none; color: white;}
+.logo{font-family:'Bebas Neue',cursive;font-size:1.9rem;letter-spacing:.08em;color:var(--white);display:flex;align-items:center;gap:4px}
+.logo .dot{color:var(--red)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-badge{background:var(--yellow);color:var(--black);font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:2px}
+.nav-count{font-size:.75rem;color:var(--muted);border:1px solid var(--gray3);padding:3px 10px;border-radius:999px}
+.nav-count span{color:var(--yellow);font-weight:600}
+
+#contacts a{
+  padding: 5px;
+  display: block;
+  color: white;
+  font-size: auto;
+  text-decoration: none;
+}
+/* ── HERO ── */
+.hero{
+  position:relative;padding:5rem 2rem 4rem;text-align:center;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% -10%,rgba(224,16,16,.1) 0%,transparent 65%);
+}
+.hero-line{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--yellow);margin-bottom:.9rem}
+h1{font-family:'Bebas Neue',cursive;font-size:clamp(3.2rem,9vw,7rem);letter-spacing:.04em;line-height:.95;color:var(--white);margin-bottom:1.2rem}
+h1 .accent{color:var(--red)}
+.hero-sub{font-size:.9rem;font-weight:300;color:var(--muted);max-width:520px;margin:0 auto 2.5rem;line-height:1.75}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:2.5rem}
+.tag{
+  font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--gray3);color:var(--muted);padding:5px 13px;border-radius:2px;
+  cursor:pointer;transition:all .2s;
+}
+.tag:hover,.tag.active{border-color:var(--red);color:var(--white);background:rgba(224,16,16,.1)}
+.tag.active{background:var(--red);color:var(--white);border-color:var(--red)}
+
+/* ── SECTION HEADERS ── */
+.sec-wrap{padding:0 1.5rem 4rem}
+.sec-head{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:1.5rem;padding-top:3rem;
+}
+.sec-head::before{content:'';flex:0 0 3px;height:28px;background:var(--red);border-radius:2px}
+.sec-title{font-family:'Bebas Neue',cursive;font-size:1.8rem;letter-spacing:.06em;color:var(--white)}
+.sec-sub{font-size:.72rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-left:auto}
+.sec-line{height:1px;background:linear-gradient(90deg,var(--gray2),transparent);margin-bottom:1.5rem}
+
+/* ── MASONRY ── */
+.masonry{columns:4 200px;column-gap:8px}
+.card{
+  break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;
+  border-radius:3px;cursor:pointer;background:var(--gray1);display:block;
+  border:1px solid var(--gray2);transition:border-color .25s;
+}
+.card:hover{border-color:var(--red)}
+.card img{width:100%;height:auto;display:block;transition:transform .45s ease;border-radius:2px}
+.card:hover img{transform:scale(1.06)}
+.card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 55%);
+  opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:10px 12px;border-radius:2px;
+}
+.card:hover .card-overlay{opacity:1}
+.card-label{font-size:.7rem;font-weight:500;color:var(--white);line-height:1.3;transform:translateY(5px);transition:transform .3s}
+.card:hover .card-label{transform:translateY(0)}
+.card-num{
+  position:absolute;top:7px;right:7px;
+  background:var(--yellow);color:var(--black);
+  font-size:.58rem;font-weight:700;padding:2px 6px;border-radius:2px;
+  opacity:0;transition:opacity .2s;
+}
+.card:hover .card-num{opacity:1}
+
+/* Accent: first card in each section gets a yellow border */
+.card.featured{border-color:var(--yellow-dk)}
+
+/* ── FILTER HIDE ── */
+.sec-wrap.hidden{display:none}
+
+/* ── LIGHTBOX ── */
+#lb{
+  position:fixed;inset:0;z-index:999;
+  background:rgba(0,0,0,.95);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+}
+#lb.open{display:flex}
+.lb-inner{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-height:82vh}
+#lb-img{
+  max-width:88vw;max-height:80vh;width:auto;height:auto;
+  display:block;object-fit:contain;border-radius:3px;
+  transition:opacity .22s;
+}
+#lb-img.fading{opacity:0}
+.lb-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:var(--red);border:none;color:var(--white);
+  width:46px;height:46px;border-radius:50%;font-size:1.3rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .2s;z-index:2;
+}
+.lb-btn:hover{background:var(--red-dk);transform:translateY(-50%) scale(1.1)}
+#lb-prev{left:-58px}
+#lb-next{right:-58px}
+#lb-close{
+  position:fixed;top:18px;right:22px;
+  background:var(--gray2);border:1px solid var(--gray3);
+  color:var(--white);width:42px;height:42px;border-radius:50%;
+  font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:10;
+}
+#lb-close:hover{background:var(--red);border-color:var(--red)}
+.lb-footer{margin-top:14px;display:flex;align-items:center;gap:16px}
+#lb-counter{font-size:.72rem;color:var(--muted);letter-spacing:.12em}
+#lb-cat{font-size:.65rem;background:var(--red);color:var(--white);padding:2px 8px;border-radius:2px;letter-spacing:.08em;text-transform:uppercase}
+#lb-title{font-size:.82rem;font-weight:500;color:var(--white);max-width:400px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:75vw;margin-top:8px}
+.lb-dot{width:6px;height:6px;border-radius:50%;background:var(--gray3);border:1px solid var(--gray3);cursor:pointer;transition:background .2s;flex-shrink:0}
+.lb-dot.active{background:var(--red);border-color:var(--red)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray2);padding:2rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.ft-logo{font-family:'Bebas Neue',cursive;font-size:1.4rem;color:var(--white)}
+.ft-logo span{color:var(--red)}
+.ft-copy{font-size:.72rem;color:var(--muted)}
+.ft-link{color:var(--yellow);text-decoration:none}.ft-link:hover{text-decoration:underline}
+#contacts a{
+  letter-spacing: 2px;
+  font-family:'Bebas Neue',cursive;
+  padding: 5px;
+  display: block;
+  color: white;
+  font-size: .72rem;
+  text-decoration: none;
+}
+/* ── KB HINT ── */
+.kb-hint{
+  position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+  background:var(--gray2);border:1px solid var(--gray3);
+  color:var(--muted);font-size:.65rem;padding:5px 14px;border-radius:999px;
+  pointer-events:none;opacity:0;transition:opacity .3s;z-index:1000;white-space:nowrap;
+}
+.kb-hint.show{opacity:1}
+
+@media(max-width:600px){
+  #lb-prev{left:-36px}.lb-btn{width:36px;height:36px;font-size:1rem}
+  #lb-next{right:-36px}
+  .masonry{columns:2 140px}
+  h1{font-size:3rem}
+}
+/* ── LOADING SCREEN ── */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0A0A0A;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-logo {
+  text-decoration: none;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 3.5rem;
+  letter-spacing: 0.1em;
+  color: #F5F5F5;
+}
+.loader-logo span { color: #E01010; }
+.loader-bar-wrap {
+  width: 200px;
+  height: 2px;
+  background: #222;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.loader-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #E01010, #FFD600);
+  border-radius: 999px;
+  animation: load-fill 1.8s ease forwards;
+}
+@keyframes load-fill {
+  0%   { width: 0%; }
+  60%  { width: 75%; }
+  100% { width: 100%; }
+}
+.loader-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #777;
+}
+</style>
+</head>
+<body>
+<div id="loader">
+  <div class="loader-logo">SHAYAN<span>.</span>PS</div>
+  <div class="loader-bar-wrap">
+    <div class="loader-bar"></div>
+  </div>
+  <div class="loader-label">Loading Portfolio…</div>
+</div>
+
+<nav>
+  <div class="logo"><a href="index.html">SHAYAN<span class="dot">.</span>PS</a></div>
+  <div class="nav-right">
+    <div class="nav-count">Total: <span id="nav-total">0</span> works</div>
+    <div class="nav-badge">Design Portfolio</div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <p class="eyebrow">Digital Design &amp; Branding Portfolio</p>
+  <h1>Muhammad Shayan<br><span class="accent">Shahbaz</span></h1>
+  <p class="hero-sub">Logos · Menus · Proposals · Flyers · Cutouts · Photo Manipulation · Branding — every project, every folder, one gallery.</p>
+  <div class="hero-tags">
+    <div class="tag active" data-filter="all">All Works</div>
+    <div class="tag" data-filter="photoshop">Photoshop</div>
+    <div class="tag" data-filter="logos">Logos</div>
+    <div class="tag" data-filter="menus">Menus</div>
+    <div class="tag" data-filter="proposals">Proposals</div>
+    <div class="tag" data-filter="branding">Branding &amp; Soaps</div>
+    <div class="tag" data-filter="cutouts">Cutouts</div>
+    <div class="tag" data-filter="hak">HAK Store</div>
+  </div>
+  <div class="hero-line"></div>
+</section>
+
+<div id="sections-container"></div>
+
+<footer>
+  <div class="ft-logo">SHAYAN<span>.</span>PS</div>
+  <div class="ft-copy">Portfolio by <a href="https://github.com/MuhammadShayanShahbaz/Digital-Design-and-Branding-Portfolio" class="ft-link" target="_blank">Muhammad Shayan Shahbaz</a> · All rights reserved</div>
+  
+  <div id="contacts">
+  <a href="mailto:shayanshahbaz96@gmail.com">shayanshahbaz96@gmail.com</a>
+  <a href="https://snowvalley.netlify.app/">Main Portfolio</a>
+  <a href="https://github.com/MuhammadShayanShahbaz">github</a>
+  <a href="https://www.linkedin.com/in/muhammad-shayan-shahbaz/">Linkdin</a>  
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lb" role="dialog" aria-modal="true">
+  <button id="lb-close" aria-label="Close">✕</button>
+  <div class="lb-inner">
+    <button class="lb-btn" id="lb-prev">&#8592;</button>
+    <img id="lb-img" src="" alt="">
+    <button class="lb-btn" id="lb-next">&#8594;</button>
+  </div>
+  <div class="lb-footer">
+    <span id="lb-counter"></span>
+    <span id="lb-cat"></span>
+    <span id="lb-title"></span>
+  </div>
+  <div class="lb-dots" id="lb-dots"></div>
+</div>
+<div class="kb-hint" id="kb-hint">← → navigate &nbsp;·&nbsp; Esc to close</div>
+
+<script>
+const R = 'https://raw.githubusercontent.com/MuhammadShayanShahbaz/Digital-Design-and-Branding-Portfolio/main/';
+
+const SECTIONS = [
+  {
+    id: 'photoshop', label: 'Photoshop Projects', filter: 'photoshop',
+    sub: 'Photo manipulation · Masking · Lighting · Typography',
+    images: [
+      {url: R+'Photoshop%20Projects/Collage.jpg', name:'Collage'},
+      {url: R+'Photoshop%20Projects/Day%201%20Masking%20.jpg', name:'Day 1 Masking'},
+      {url: R+'Photoshop%20Projects/Donuts%20Typography%20collage.png', name:'Donuts Typography Collage'},
+      {url: R+'Photoshop%20Projects/HAK%20Products%20Logo.png', name:'HAK Products Logo'},
+      {url: R+'Photoshop%20Projects/Masking%20Gradients.png', name:'Masking Gradients'},
+      {url: R+'Photoshop%20Projects/Typography%20and%20layers.png', name:'Typography & Layers'},
+      {url: R+'Photoshop%20Projects/brighens.jpg', name:'Brightness Adjustment'},
+      {url: R+'Photoshop%20Projects/brush%20manipulation.jpg', name:'Brush Manipulation'},
+      {url: R+'Photoshop%20Projects/color%20and%20object%20integration.png', name:'Color & Object Integration'},
+      {url: R+'Photoshop%20Projects/color%20switch.png', name:'Color Switch'},
+      {url: R+'Photoshop%20Projects/dodge%20%26%20burn%20.png', name:'Dodge & Burn (v1)'},
+      {url: R+'Photoshop%20Projects/dodge%20%26%20burn.png', name:'Dodge & Burn (v2)'},
+      {url: R+'Photoshop%20Projects/duplicate.png', name:'Duplicate Layer Effect'},
+      {url: R+'Photoshop%20Projects/image%20enhnaced.jpg', name:'Image Enhanced'},
+      {url: R+'Photoshop%20Projects/lighting.png', name:'Lighting (v1)'},
+      {url: R+'Photoshop%20Projects/lighting2.png', name:'Lighting (v2)'},
+      {url: R+'Photoshop%20Projects/magic%20tool.png', name:'Magic Tool'},
+      {url: R+'Photoshop%20Projects/masking%20%20and%20layers%20PNG.PNG', name:'Masking & Layers'},
+      {url: R+'Photoshop%20Projects/multiply.jpg', name:'Multiply Blend'},
+      {url: R+'Photoshop%20Projects/o.png', name:'Composition O'},
+      {url: R+'Photoshop%20Projects/sampling.png', name:'Sampling'},
+      {url: R+'Photoshop%20Projects/shading.PNG', name:'Shading'},
+      {url: R+'Photoshop%20Projects/shadow%20lighen.png', name:'Shadow & Lighten'},
+    ]
+  },
+  {
+    id: 'cutouts', label: 'Elden Ring Cutouts', filter: 'cutouts',
+    sub: 'Precision pen-tool pathing · Subject isolation',
+    images: [
+      {url: R+'Photoshop%20Projects/Elden%20Ring%20Cutouts%20Photoshop/Queen_Marika_the_Eternal.png', name:'Queen Marika the Eternal'},
+      {url: R+'Photoshop%20Projects/Elden%20Ring%20Cutouts%20Photoshop/messmer-has-not-been-exiled-hes-exactly-where-hes-meant-to-v0-jri9weu4nz0d1%20copy.png', name:'Messmer Cutout'},
+    ]
+  },
+  {
+    id: 'logos', label: 'Logos', filter: 'logos',
+    sub: 'Brand identity · Vector design · Commercial logos',
+    images: [
+      {url: R+'Canva%20Projects/Logos/BUILDIT%20GYM%20BLACK.jpeg', name:'BuildIt Gym — Black'},
+      {url: R+'Canva%20Projects/Logos/BUILDIT%20GYM%20WHITE.jpeg', name:'BuildIt Gym — White'},
+      {url: R+'Canva%20Projects/Logos/Paimaino.png', name:'Paimaino Logo'},
+      {url: R+'Canva%20Projects/Logos/SMR.jpg', name:'SMR Logo'},
+      {url: R+'Canva%20Projects/Logos/tiptop.png', name:'TipTop Logo'},
+    ]
+  },
+  {
+    id: 'menus', label: 'Menus', filter: 'menus',
+    sub: 'Service menus · Layout & typography',
+    images: [
+      {url: R+'Canva%20Projects/Menus/Service%20menu%20Shanzi%20Saloon%20pg1%20.png', name:'Shanzi Saloon Menu — Page 1'},
+      {url: R+'Canva%20Projects/Menus/Service%20menu%20Shanzi%20Saloon%20pg2%20.png', name:'Shanzi Saloon Menu — Page 2'},
+    ]
+  },
+  {
+    id: 'proposals', label: 'Proposals & Sponsorship Decks', filter: 'proposals',
+    sub: 'IEEE · SOFTEC · Commercial proposals · Digital media',
+    images: [
+      {url: R+'Canva%20Projects/IEEE%20ENSOFEST%20Proposal/WhatsApp%20Image%202026-04-30%20at%2010.35.24%20AM%20(1).jpeg', name:'IEEE ENSOFEST Proposal — Slide 1'},
+      {url: R+'Canva%20Projects/IEEE%20ENSOFEST%20Proposal/WhatsApp%20Image%202026-04-30%20at%2010.35.24%20AM%20(2).jpeg', name:'IEEE ENSOFEST Proposal — Slide 2'},
+      {url: R+'Canva%20Projects/IEEE%20ENSOFEST%20Proposal/WhatsApp%20Image%202026-04-30%20at%2010.35.24%20AM.jpeg', name:'IEEE ENSOFEST Proposal — Slide 3'},
+      {url: R+'Canva%20Projects/IEEE%20ENSOFEST%20Proposal/WhatsApp%20Image%202026-04-30%20at%2010.35.25%20AM%20(1).jpeg', name:'IEEE ENSOFEST Proposal — Slide 4'},
+      {url: R+'Canva%20Projects/IEEE%20ENSOFEST%20Proposal/WhatsApp%20Image%202026-04-30%20at%2010.35.25%20AM%20(2).jpeg', name:'IEEE ENSOFEST Proposal — Slide 5'},
+      {url: R+'Canva%20Projects/IEEE%20ENSOFEST%20Proposal/WhatsApp%20Image%202026-04-30%20at%2010.35.25%20AM.jpeg', name:'IEEE ENSOFEST Proposal — Slide 6'},
+      {url: R+'Canva%20Projects/IEEE%20ENSOFEST%20Proposal/WhatsApp%20Image%202026-04-30%20at%2010.35.26%20AM%20(1).jpeg', name:'IEEE ENSOFEST Proposal — Slide 7'},
+      {url: R+'Canva%20Projects/IEEE%20ENSOFEST%20Proposal/WhatsApp%20Image%202026-04-30%20at%2010.35.26%20AM%20(2).jpeg', name:'IEEE ENSOFEST Proposal — Slide 8'},
+      {url: R+'Canva%20Projects/IEEE%20ENSOFEST%20Proposal/WhatsApp%20Image%202026-04-30%20at%2010.35.26%20AM.jpeg', name:'IEEE ENSOFEST Proposal — Slide 9'},
+      {url: R+'Canva%20Projects/IEEE%20Proposal/WhatsApp%20Image%202024-12-01%20at%2011.46.44_a47e4e85.jpg', name:'IEEE Proposal — Page 1'},
+      {url: R+'Canva%20Projects/IEEE%20Proposal/WhatsApp%20Image%202024-12-01%20at%2011.46.45_3193940f.jpg', name:'IEEE Proposal — Page 2'},
+      {url: R+'Canva%20Projects/IEEE%20Proposal/WhatsApp%20Image%202024-12-01%20at%2011.46.45_6040a612.jpg', name:'IEEE Proposal — Page 3'},
+      {url: R+'Canva%20Projects/IEEE%20Proposal/WhatsApp%20Image%202024-12-01%20at%2011.46.45_699c6c5c.jpg', name:'IEEE Proposal — Page 4'},
+      {url: R+'Canva%20Projects/IEEE%20Proposal/WhatsApp%20Image%202024-12-01%20at%2011.46.46_2ceb27db.jpg', name:'IEEE Proposal — Page 5'},
+      {url: R+'Canva%20Projects/IEEE%20Proposal/WhatsApp%20Image%202024-12-01%20at%2011.46.46_3e2cac04.jpg', name:'IEEE Proposal — Page 6'},
+      {url: R+'Canva%20Projects/IEEE%20Proposal/WhatsApp%20Image%202024-12-01%20at%2011.46.47_31966e59.jpg', name:'IEEE Proposal — Page 7'},
+      {url: R+'Canva%20Projects/IEEE%20Proposal/WhatsApp%20Image%202024-12-01%20at%2011.46.47_4e3e8329.jpg', name:'IEEE Proposal — Page 8'},
+      {url: R+'Canva%20Projects/IEEE%20Proposal/WhatsApp%20Image%202024-12-01%20at%2011.46.47_d08f52b5.jpg', name:'IEEE Proposal — Page 9'},
+      {url: R+'Canva%20Projects/IEEE%20Proposal/IEEE%20Proposal%20for%20juniors/JOIN%20IEEE%20.jpeg', name:'Join IEEE — Junior Flyer'},
+    ]
+  },
+  {
+    id: 'branding', label: 'Shanzi Soaps — Brand Campaign', filter: 'branding',
+    sub: 'Product photography · Commercial branding · Visual identity',
+    images: [
+      {url: R+'SHANZI%20SOAPS/1.jpg', name:'Shanzi Soaps — Shot 1'},
+      {url: R+'SHANZI%20SOAPS/2.jpg', name:'Shanzi Soaps — Shot 2'},
+      {url: R+'SHANZI%20SOAPS/3.jpg', name:'Shanzi Soaps — Shot 3'},
+      {url: R+'SHANZI%20SOAPS/4.jpg', name:'Shanzi Soaps — Shot 4'},
+      {url: R+'SHANZI%20SOAPS/5.jpg', name:'Shanzi Soaps — Shot 5'},
+    ]
+  },
+  {
+    id: 'hak', label: 'HAK Products — Ecommerce Logo System', filter: 'hak',
+    sub: 'E-commerce branding · Logo variants · Object library',
+    images: [
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/fffff.png', name:'HAK Products — Final Logo'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/26.png', name:'HAK — Variant 26'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/27.png', name:'HAK — Variant 27'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/1%2C2.png', name:'HAK — Concept 1.2'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/1%2C3.png', name:'HAK — Concept 1.3'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/1%2C4.png', name:'HAK — Concept 1.4'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/1%2C5.png', name:'HAK — Concept 1.5'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/1%2C6.png', name:'HAK — Concept 1.6'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/1%2C7.png', name:'HAK — Concept 1.7'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/1%2C8.png', name:'HAK — Concept 1.8'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/1%2C9.png', name:'HAK — Concept 1.9'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/1%2C10.png', name:'HAK — Concept 1.10'},
+      {url: R+'HAK%20Products%20Ecommerce%20Store%20Logo/1%2C11.png', name:'HAK — Concept 1.11'},
+    ]
+  },
+];
+
+// ── Build flat global list for lightbox navigation ──
+let allImages = []; // {url, name, section}
+let current = 0;
+
+function buildGallery() {
+  const container = document.getElementById('sections-container');
+  let totalCount = 0;
+
+  SECTIONS.forEach((sec, si) => {
+    totalCount += sec.images.length;
+    const startIdx = allImages.length;
+
+    sec.images.forEach((img, ii) => {
+      allImages.push({url: img.url, name: img.name, section: sec.label, globalIdx: allImages.length});
+    });
+
+    const wrap = document.createElement('div');
+    wrap.className = 'sec-wrap';
+    wrap.dataset.filter = sec.filter;
+
+    wrap.innerHTML = `
+      <div class="sec-head">
+        <div class="sec-title">${sec.label}</div>
+        <div class="sec-sub">${sec.images.length} works &nbsp;·&nbsp; ${sec.sub}</div>
+      </div>
+      <div class="sec-line"></div>
+      <div class="masonry" id="grid-${sec.id}"></div>
+    `;
+    container.appendChild(wrap);
+
+    const grid = wrap.querySelector(`#grid-${sec.id}`);
+    sec.images.forEach((img, ii) => {
+      const gIdx = startIdx + ii;
+      const card = document.createElement('div');
+      card.className = 'card' + (ii === 0 ? ' featured' : '');
+      card.setAttribute('tabindex','0');
+      card.setAttribute('role','button');
+      card.setAttribute('aria-label', `Open ${img.name}`);
+      card.innerHTML = `
+        <img src="${img.url}" alt="${img.name}" loading="lazy" onerror="this.closest('.card').style.display='none'">
+        <div class="card-overlay"><span class="card-label">${img.name}</span></div>
+        <span class="card-num">${String(ii+1).padStart(2,'0')}</span>
+      `;
+      card.addEventListener('click', () => openLightbox(gIdx));
+      card.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') openLightbox(gIdx); });
+      grid.appendChild(card);
+    });
+  });
+
+  document.getElementById('nav-total').textContent = totalCount;
+  buildDots();
+}
+
+// ── Filter logic ──
+document.querySelectorAll('.tag').forEach(tag => {
+  tag.addEventListener('click', () => {
+    document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+    tag.classList.add('active');
+    const f = tag.dataset.filter;
+    document.querySelectorAll('.sec-wrap').forEach(sw => {
+      sw.classList.toggle('hidden', f !== 'all' && sw.dataset.filter !== f);
+    });
+  });
+});
+
+// ── Lightbox ──
+function buildDots() {
+  const row = document.getElementById('lb-dots');
+  row.innerHTML = '';
+  allImages.forEach((_,i) => {
+    const d = document.createElement('button');
+    d.className = 'lb-dot';
+    d.setAttribute('aria-label', `Image ${i+1}`);
+    d.addEventListener('click', () => goTo(i));
+    row.appendChild(d);
+  });
+}
+
+function openLightbox(i) {
+  current = i;
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderLb();
+  showHint();
+}
+function closeLightbox() {
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function renderLb() {
+  const img = allImages[current];
+  const el = document.getElementById('lb-img');
+  el.classList.add('fading');
+  setTimeout(() => { el.src = img.url; el.alt = img.name; el.classList.remove('fading'); }, 160);
+  document.getElementById('lb-counter').textContent = `${current+1} / ${allImages.length}`;
+  document.getElementById('lb-title').textContent = img.name;
+  document.getElementById('lb-cat').textContent = img.section;
+  document.querySelectorAll('.lb-dot').forEach((d,i) => d.classList.toggle('active', i===current));
+}
+function goTo(i) {
+  current = ((i % allImages.length) + allImages.length) % allImages.length;
+  renderLb();
+}
+let hintTimer;
+function showHint() {
+  const h = document.getElementById('kb-hint');
+  h.classList.add('show');
+  clearTimeout(hintTimer);
+  hintTimer = setTimeout(() => h.classList.remove('show'), 2800);
+}
+document.getElementById('lb-prev').addEventListener('click', () => goTo(current-1));
+document.getElementById('lb-next').addEventListener('click', () => goTo(current+1));
+document.getElementById('lb-close').addEventListener('click', closeLightbox);
+document.getElementById('lb').addEventListener('click', e => { if(e.target===document.getElementById('lb')) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if(!document.getElementById('lb').classList.contains('open')) return;
+  if(e.key==='ArrowLeft') goTo(current-1);
+  if(e.key==='ArrowRight') goTo(current+1);
+  if(e.key==='Escape') closeLightbox();
+});
+
+// ── LOADING SCREEN DISMISS ──
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 1900);
+});
+
+buildGallery();
+
+
+</script>
+</body>
+</html>
